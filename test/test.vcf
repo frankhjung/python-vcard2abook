@@ -1,0 +1,36 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Good Record
+N:Record;Good;;;
+NICKNAME:good
+EMAIL;TYPE=INTERNET:good.record@gmail.com
+END:VCARD
+
+BEGIN:VCARD
+VERSION:3.0
+FN:
+N:;;;;
+EMAIL;TYPE=INTERNET:no.name@gmail.com
+END:VCARD
+FN:Some Body (Google+)
+N:Body;Some;;;(Google+)
+EMAIL;TYPE=INTERNET:replyto+CiV6MTNuZ3pnejNxemJ4cGt3aTA0Y2RyM2pmdXIxZmQ1YnF
+ xazBrEOjlyqfOFw+AI3v7_UAAAAAUrZVzA6UC1hcBBhUoFk1tAgRWAFIVh1u@plus.google.c
+ om
+END:VCARD
+
+BEGIN:VCARD
+VERSION:3.0
+FN:Reply+
+N:;Reply+;;;
+EMAIL;TYPE=INTERNET:d+AORGpRf9mMqVT_Oe5CN3lNmVRXEI4wP5W5FJfAHcos3pjxOLhIewV
+ 4kNAyLqjcbWoLnhGLugpfYLRnx_7j8iG-DebbIegYRofwnUZXySTRWOV41nrqK1F2M@docs.go
+ ogle.com
+END:VCARD
+
+BEGIN:VCARD
+VERSION:3.0
+FN:No Email
+N:Email;No;;;
+NOTE:Has no email
+END:VCARD
