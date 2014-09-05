@@ -1,8 +1,9 @@
-.PROXY: all
+.DEFAULT_GOAL := help
+.PHONY: clean test
 
 help:
 	@echo
-	@echo "Default targets: all"
+	@echo "Default goal: ${.DEFAULT_GOAL}"
 	@echo "  all: check run test"
 	@echo "  check: run pychecker and pep8"
 	@echo "  test:  run against test data"
@@ -21,20 +22,17 @@ run:
 	# run main with verbose to stdout
 	python -m vcf2abook test/test.vcf
 
-test: force_make
+test:
 	# run against test data and check results
 	@mkdir -p target
 	python -m vcf2abook test/test.vcf target/test.out
 	diff test/test.expected target/test.out
 
 clean: 
-	# Cleaning workspace
+	# cleaning workspace
 	python-coverage erase
 	-$(RM) -f *.pyc *.pyo
-	# Clean generated documents
+	# clean generated documents
 	-$(RM) -rf target
-
-force_make:
-	true
 
 #EOF
