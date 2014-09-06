@@ -6,49 +6,61 @@ import os.path
 import sys
 
 
-class Header:
+#
+# abook a Mutt addressbook
+#
+class Abook:
 
-    """ abook header """
-
-    def __init__(self, version='0.6.0pre2'):
-        self.version = version
-
-    def __str__(self):
-        return '[format]\n' \
-            'program=abook\n' \
-            'version={}\n' \
-            .format(self.version)
-
-
-class Address:
-
-    """ abook address """
-
-    def __init__(self, count=0):
-        self.count = count
-        self.name = ''
-        self.nick = ''
-        self.emails = []
+    """ abook representation """
 
     def __str__(self):
-        return '\n[{}]\n' \
-            'name={}\n' \
-            'nick={}\n' \
-            'email={}\n' \
-            .format(self.count,
-                    self.name,
-                    self.nick,
-                    ', '.join(self.emails))
+        return str(self.Address())
 
-    def isComplete(self):
-        if not self.name:
-            return False
-        elif not self.emails:
-            return False
-        else:
-            return True
+    class Header:
+
+        """ abook header """
+
+        def __init__(self, version='0.6.0pre2'):
+            self.version = version
+
+        def __str__(self):
+            return '[format]\n' \
+                'program=abook\n' \
+                'version={}\n' \
+                .format(self.version)
+
+    class Address:
+
+        """ abook address """
+
+        def __init__(self, count=0):
+            self.count = count
+            self.name = ''
+            self.nick = ''
+            self.emails = []
+
+        def __str__(self):
+            return '\n[{}]\n' \
+                'name={}\n' \
+                'nick={}\n' \
+                'email={}\n' \
+                .format(self.count,
+                        self.name,
+                        self.nick,
+                        ', '.join(self.emails))
+
+        def isComplete(self):
+            if not self.name:
+                return False
+            elif not self.emails:
+                return False
+            else:
+                return True
 
 
+#
+# MAINLINE
+#
 def main(argv=sys.argv):
 
     """ Convert from Google vcard addresses to abook format. """
@@ -83,18 +95,19 @@ def main(argv=sys.argv):
     infile = args.infile
     outfile = args.outfile
 
-    # start abook
-    outfile.write(str(Header()))
+    # start abook with header records
+    abook = Abook()
+    outfile.write(str(abook.Header()))
 
-    # first address
+    # initialise for first address
     count = 0
-    address = Address(count)
+    address = abook.Address(count)
 
     # read infile until end of file
     for line in infile.readlines():
         # start a new address
         if line.startswith('BEGIN:VCARD'):
-            address = Address(count)
+            address = abook.Address(count)
         # set name but ignore Google+ and Reply+
         elif line.startswith('FN:') \
                 and line.find('(Google+)') == -1 \

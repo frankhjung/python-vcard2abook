@@ -32,7 +32,7 @@ clean:
 	# cleaning workspace
 	python-coverage erase
 	-$(RM) -f *.pyc *.pyo
-	# clean generated documents
+	# clean generated artifacts
 	-$(RM) -rf target
 
 #EOF
