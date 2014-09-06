@@ -101,7 +101,7 @@ def main(argv=sys.argv):
 
     # initialise for first address
     count = 0
-    address = abook.Address(count)
+    address = None
 
     # read infile until end of file
     for line in infile.readlines():
@@ -109,22 +109,29 @@ def main(argv=sys.argv):
         if line.startswith('BEGIN:VCARD'):
             address = abook.Address(count)
         # set name but ignore Google+ and Reply+
-        elif line.startswith('FN:') \
+        elif address \
+                and line.startswith('FN:') \
                 and line.find('(Google+)') == -1 \
                 and line.find('Reply+') == -1:
             address.name = line.split(':')[-1].strip()
         # append to list of emails
-        elif line.startswith('EMAIL;') and address.name:
+        elif address \
+                and address.name \
+                and line.startswith('EMAIL;'):
             email = line.split(':')[-1].strip()
             address.emails.append(email)
         # set nickname
-        elif line.startswith('NICKNAME:') and address.name:
+        elif address \
+                and address.name \
+                and line.startswith('NICKNAME:'):
             address.nick = line.split(':')[-1].strip().lower()
-        # print if address completed
-        elif line.startswith('END:VCARD'):
+        # print if address completed and reset for next address
+        elif address \
+                and line.startswith('END:VCARD'):
             if address.isComplete():
                 outfile.write(str(address))
                 count += 1
+            address = None
         else:
             continue
 
