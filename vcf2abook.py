@@ -65,13 +65,13 @@ def main(argv=sys.argv):
         nargs='?',
         type=argparse.FileType('r'),
         default=sys.stdin,
-        help='Google vcard export')
+        help='vcards')
     parser.add_argument(
         'outfile',
         nargs='?',
         type=argparse.FileType('w'),
         default=sys.stdout,
-        help='abook addressbook')
+        help='abook')
     parser.add_argument(
         '-v',
         '--version',
@@ -92,14 +92,10 @@ def main(argv=sys.argv):
 
     # read infile until end of file
     for line in infile.readlines():
-        # print completed address
-        if line.startswith('END:VCARD'):
-            if address.isComplete():
-                outfile.write(str(address))
-                count += 1
-            # start a new address
+        # start a new address
+        if line.startswith('BEGIN:VCARD'):
             address = Address(count)
-        # set name but ignore google+ info
+        # set name but ignore Google+ and Reply+
         elif line.startswith('FN:') \
                 and line.find('(Google+)') == -1 \
                 and line.find('Reply+') == -1:
@@ -111,6 +107,13 @@ def main(argv=sys.argv):
         # set nickname
         elif line.startswith('NICKNAME:') and address.name:
             address.nick = line.split(':')[-1].strip().lower()
+        # print if address completed
+        elif line.startswith('END:VCARD'):
+            if address.isComplete():
+                outfile.write(str(address))
+                count += 1
+        else:
+            continue
 
     return 0
 
