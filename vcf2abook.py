@@ -37,16 +37,19 @@ class Abook:
             self.count = count
             self.name = ''
             self.nick = ''
+            self.notes = ''
             self.emails = []
 
         def __str__(self):
             return '\n[{}]\n' \
                 'name={}\n' \
                 'nick={}\n' \
+                'notes={}\n' \
                 'email={}\n' \
                 .format(self.count,
                         self.name,
                         self.nick,
+                        self.notes,
                         ', '.join(self.emails))
 
         def isComplete(self):
@@ -125,6 +128,11 @@ def main(argv=sys.argv):
                 and address.name \
                 and line.startswith('NICKNAME:'):
             address.nick = line.split(':')[-1].strip().lower()
+        # set notes with mobile number
+        elif address \
+                and address.name \
+                and line.startswith('TEL;TYPE=CELL:'):
+            address.notes = line.split(':')[-1].strip().lower()
         # print if address completed and reset for next address
         elif address \
                 and line.startswith('END:VCARD'):
