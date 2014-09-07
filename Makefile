@@ -16,7 +16,7 @@ check:
 	# check with PyChecker
 	pychecker --only vcard2abook.py
 	# check with Pep8
-	pep8 --verbose vcard2abook.py
+	pep8 --verbose --repeat --statistics vcard2abook.py
 
 run:
 	# run main with verbose to stdout
@@ -24,15 +24,15 @@ run:
 
 test:
 	# run against test data and check results
-	@mkdir -p target
+	-@mkdir -p target
 	python -m vcard2abook test/test.vcf target/test.out
 	diff test/test.expected target/test.out
 
 clean: 
 	# cleaning workspace
 	python-coverage erase
-	-$(RM) -f *.pyc *.pyo
+	-@rm -f *.pyc *.pyo
 	# clean generated artifacts
-	-$(RM) -rf target
+	-@rm -f target
 
 #EOF
