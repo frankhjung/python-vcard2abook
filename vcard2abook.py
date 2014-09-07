@@ -105,16 +105,16 @@ def main(argv=sys.argv):
     infile = args.infile
     outfile = args.outfile
 
-    # start abook with header records
+    # print abook header
     abook = Abook()
     outfile.write(str(abook.Header()))
 
-    # initialise for first address
+    # initialise ready for first address
     count = 0
     address = None
 
     # read infile until end of file
-    for line in infile.readlines():
+    for line in infile:
         # start a new address
         if line.startswith('BEGIN:VCARD'):
             address = abook.Address(count)
