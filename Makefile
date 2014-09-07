@@ -14,18 +14,18 @@ all: check run test
 
 check:
 	# check with PyChecker
-	pychecker --only vcf2abook.py
+	pychecker --only vcard2abook.py
 	# check with Pep8
-	pep8 --verbose vcf2abook.py
+	pep8 --verbose vcard2abook.py
 
 run:
 	# run main with verbose to stdout
-	python -m vcf2abook test/test.vcf
+	python -m vcard2abook test/test.vcf
 
 test:
 	# run against test data and check results
 	@mkdir -p target
-	python -m vcf2abook test/test.vcf target/test.out
+	python -m vcard2abook test/test.vcf target/test.out
 	diff test/test.expected target/test.out
 
 clean: 

@@ -1,17 +1,24 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 import argparse
 import os.path
 import sys
 
 
-#
-# abook a Mutt addressbook
-#
 class Abook:
 
-    """ abook representation """
+    """
+    abook - convert vcard to abook addresses for use in Mutt
+
+    Method:
+        -- Reads a VCARD export from Google Mail
+        -- writes only records with name and email
+
+    References:
+        -- http://en.wikipedia.org/wiki/VCard
+        -- http://linux.die.net/man/1/abook
+    """
 
     def __str__(self):
         return str(self.Address())
