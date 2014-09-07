@@ -128,11 +128,11 @@ def main(argv=sys.argv):
                 and address.name \
                 and line.startswith('NICKNAME:'):
             address.nick = line.split(':')[-1].strip().lower()
-        # set notes with mobile number
+        # set notes with mobile number to be displayed during address queries
         elif address \
                 and address.name \
                 and line.startswith('TEL;TYPE=CELL:'):
-            address.notes = line.split(':')[-1].strip().lower()
+            address.notes = line.split(':')[-1].strip()
         # print if address completed and reset for next address
         elif address \
                 and line.startswith('END:VCARD'):

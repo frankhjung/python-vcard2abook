@@ -3,6 +3,7 @@ VERSION:3.0
 FN:Good Record
 N:Record;Good;;;
 NICKNAME:good
+TEL;TYPE=CELL:+61-428-476-995
 EMAIL;TYPE=INTERNET:good.record@gmail.com
 END:VCARD
 
