@@ -7,6 +7,7 @@ help:
 	@echo "  all: check run test"
 	@echo "  check: run pychecker and pep8"
 	@echo "  test:  run against test data"
+	@echo "  install: copy to bin"
 	@echo "  clean: delete all generated files"
 	@echo
 
@@ -27,6 +28,10 @@ test:
 	-@mkdir -p target
 	python -m vcard2abook test/test.vcf target/test.out
 	diff test/test.expected target/test.out
+
+install:
+	# run against test data and check results
+	-@install -v -p vcard2abook.py ~/bin/
 
 clean: 
 	# cleaning workspace
