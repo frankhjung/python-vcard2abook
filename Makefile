@@ -38,6 +38,6 @@ clean:
 	python-coverage erase
 	-@rm -f *.pyc *.pyo
 	# clean generated artifacts
-	-@rm -f target
+	-@rm -rf target
 
 #EOF
