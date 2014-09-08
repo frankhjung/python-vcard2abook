@@ -20,6 +20,11 @@ class Abook:
         -- http://linux.die.net/man/1/abook
     """
 
+    def __init__(self):
+        self.address = None
+        self.count = 0
+        self.header = self.Header()
+
     def __str__(self):
         return str(self.Address())
 
@@ -105,13 +110,13 @@ def main(argv=sys.argv):
     infile = args.infile
     outfile = args.outfile
 
-    # print abook header
-    abook = Abook()
-    outfile.write(str(abook.Header()))
-
     # initialise ready for first address
-    count = 0
-    address = None
+    abook = Abook()
+    address = abook.address
+    count = abook.count
+
+    # print abook header
+    outfile.write(str(abook.header))
 
     # read infile until end of file
     for line in infile:
